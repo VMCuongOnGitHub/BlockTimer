@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="15G31" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="Block" syncable="YES">
+        <attribute name="blockName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="blockNote" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="blockTimeInterval" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="preset" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Preset" inverseName="blocks" inverseEntity="Preset" syncable="YES"/>
+    </entity>
+    <entity name="Preset" representedClassName="Preset" syncable="YES">
+        <attribute name="friday" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="monday" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="presetName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="reminderTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="saturday" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="sunday" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="thursday" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="tuesday" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="wednesday" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="blocks" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Block" inverseName="preset" inverseEntity="Block" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Block" positionX="-63" positionY="0" width="128" height="120"/>
+        <element name="Preset" positionX="-360" positionY="-102" width="128" height="195"/>
+    </elements>
+</model>
