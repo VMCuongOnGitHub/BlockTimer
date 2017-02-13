@@ -211,7 +211,6 @@
         NSUInteger count = [managedObjectContext countForFetchRequest:request error:&error];
         if (count == NSNotFound){
             NSLog(@"error");
-            
         }
         // Not find any existed data then save the data
         else if (count == 0){
@@ -234,6 +233,7 @@
                 if (![managedObjectContext save:&error]) {
                     NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
                 }
+                [self dismissViewControllerAnimated:YES completion:nil];
             }
         }
         // Find 1 data that existed then show alert

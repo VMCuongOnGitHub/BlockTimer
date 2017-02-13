@@ -57,6 +57,16 @@ static NSString *const TimerMidTableViewCellIdentifier = @"TimerMidTableViewCell
     UIBarButtonItem *stopClock = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(stopClockButtonDidPress:)];
     self.navigationItem.leftBarButtonItem = stopClock;
     
+    indexx = 0;
+    nee = [self.blocks objectAtIndex:indexx];
+    self.titleLabel.text = nee.blockName;
+    
+    new = [[MZTimerLabel alloc]initWithLabel:self.timerLabel andTimerType:MZTimerLabelTypeTimer];
+    [new setCountDownTime:[nee.blockTimeInterval intValue]];
+    new.delegate = self;
+}
+
+-(void)viewDidAppear:(BOOL)animated{
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
     
     // iPhone4/4S
@@ -134,21 +144,13 @@ static NSString *const TimerMidTableViewCellIdentifier = @"TimerMidTableViewCell
         
         // Detail timer of overall preset
         self.totalPercentageLabel.font = [UIFont systemFontOfSize:CGRectGetHeight(self.totalPercentageLabel.frame)/0.8];
-
+        
         self.elapsedLabel.font = [UIFont systemFontOfSize:CGRectGetHeight(self.elapsedLabel.frame)/0.9];
         self.elapsedTimeLabel.font = [UIFont systemFontOfSize:CGRectGetHeight(self.elapsedTimeLabel.frame)/0.8];
         
         self.remainingLabel.font = [UIFont systemFontOfSize:CGRectGetHeight(self.remainingLabel.frame)/0.9];
         self.remainingTimeLabel.font = [UIFont systemFontOfSize:CGRectGetHeight(self.remainingTimeLabel.frame)/0.8];
     }
-    
-    indexx = 0;
-    nee = [self.blocks objectAtIndex:indexx];
-    self.titleLabel.text = nee.blockName;
-    
-    new = [[MZTimerLabel alloc]initWithLabel:self.timerLabel andTimerType:MZTimerLabelTypeTimer];
-    [new setCountDownTime:[nee.blockTimeInterval intValue]];
-    new.delegate = self;
 }
 
 -(void)timerLabel:(MZTimerLabel*)timerLabel finshedCountDownTimerWithTime:(NSTimeInterval)countTime{
@@ -161,7 +163,14 @@ static NSString *const TimerMidTableViewCellIdentifier = @"TimerMidTableViewCell
         [new setCountDownTime:[nee.blockTimeInterval intValue]];
         new.delegate = self;
         
-        [new start];
+        double delayInSeconds = 1.0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        if (![new counting]) {
+            [new start];
+        }
+        
+        });
     } else {
         NSLog(@"end"); 
     }
@@ -179,7 +188,12 @@ static NSString *const TimerMidTableViewCellIdentifier = @"TimerMidTableViewCell
                 
                 new = [[MZTimerLabel alloc]initWithLabel:self.timerLabel andTimerType:MZTimerLabelTypeTimer];
                 [new setCountDownTime:[nee.blockTimeInterval intValue]];
-                [new start];
+                new.delegate = self;
+                double delayInSeconds = 1.0;
+                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                    [new start];
+                });
             }
         } else {
             indexx--;
@@ -188,7 +202,12 @@ static NSString *const TimerMidTableViewCellIdentifier = @"TimerMidTableViewCell
             
             new = [[MZTimerLabel alloc]initWithLabel:self.timerLabel andTimerType:MZTimerLabelTypeTimer];
             [new setCountDownTime:[nee.blockTimeInterval intValue]];
-            [new start];
+                new.delegate = self;
+            double delayInSeconds = 1.0;
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                [new start];
+            });
         }
     }
 }
@@ -205,7 +224,12 @@ static NSString *const TimerMidTableViewCellIdentifier = @"TimerMidTableViewCell
             
             new = [[MZTimerLabel alloc]initWithLabel:self.timerLabel andTimerType:MZTimerLabelTypeTimer];
             [new setCountDownTime:[nee.blockTimeInterval intValue]];
-            [new start];
+            new.delegate = self;
+            double delayInSeconds = 1.0;
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                [new start];
+            });
         }
     } else {
         indexx++;
@@ -214,7 +238,12 @@ static NSString *const TimerMidTableViewCellIdentifier = @"TimerMidTableViewCell
         
         new = [[MZTimerLabel alloc]initWithLabel:self.timerLabel andTimerType:MZTimerLabelTypeTimer];
         [new setCountDownTime:[nee.blockTimeInterval intValue]];
-        [new start];
+        new.delegate = self;
+        double delayInSeconds = 1.0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [new start];
+        });
     }
     }
 }
@@ -222,7 +251,11 @@ static NSString *const TimerMidTableViewCellIdentifier = @"TimerMidTableViewCell
     if ([new counting]) {
         [new pause];
     } else {
-        [new start];
+        double delayInSeconds = 1.0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [new start];
+        });
     }
 
 }

@@ -110,10 +110,6 @@
         [minsArray addObject:strVal];
         [secsArray addObject:strVal];
     }
-
-    
-
-
 }
 
 - (void)viewDidLoad {
