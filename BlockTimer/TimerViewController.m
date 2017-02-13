@@ -52,24 +52,9 @@ static NSString *const TimerMidTableViewCellIdentifier = @"TimerMidTableViewCell
 @implementation TimerViewController
 @synthesize blocks;
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.edgesForExtendedLayout = UIRectEdgeNone;
-    UIBarButtonItem *stopClock = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(stopClockButtonDidPress:)];
-    self.navigationItem.leftBarButtonItem = stopClock;
-    
-    indexx = 0;
-    nee = [self.blocks objectAtIndex:indexx];
-    self.titleLabel.text = nee.blockName;
-    
-    new = [[MZTimerLabel alloc]initWithLabel:self.timerLabel andTimerType:MZTimerLabelTypeTimer];
-    [new setCountDownTime:[nee.blockTimeInterval intValue]];
-    new.delegate = self;
-}
 
--(void)viewDidAppear:(BOOL)animated{
+-(void)setupUI{
     CGFloat height = [UIScreen mainScreen].bounds.size.height;
-    
     // iPhone4/4S
     if (height == 480) {
         // Detail timer of blocks
@@ -83,11 +68,14 @@ static NSString *const TimerMidTableViewCellIdentifier = @"TimerMidTableViewCell
         self.blockPercentageLabel.font = [UIFont systemFontOfSize:CGRectGetHeight(self.blockTimeIntervalLabel.frame)/0.7];
         
         // Detail timer of overall preset
-        self.totalPercentageLabel.font = [UIFont systemFontOfSize:CGRectGetHeight(self.totalPercentageLabel.frame)/0.9];
-        self.elapsedLabel.font = [UIFont systemFontOfSize:CGRectGetHeight(self.elapsedLabel.frame)/1.3];
-        self.elapsedTimeLabel.font = [UIFont systemFontOfSize:CGRectGetHeight(self.elapsedTimeLabel.frame)/1.2];
-        self.remainingLabel.font = [UIFont systemFontOfSize:CGRectGetHeight(self.remainingLabel.frame)/1.3];
-        self.remainingTimeLabel.font = [UIFont systemFontOfSize:CGRectGetHeight(self.remainingTimeLabel.frame)/1.2];
+        self.totalPercentageLabel.font = [UIFont systemFontOfSize:CGRectGetHeight(self.totalPercentageLabel.frame)/1.1];
+        self.totalTimeLabel.font = [UIFont systemFontOfSize:CGRectGetHeight(self.totalTimeLabel.frame)/1.1];
+        
+        self.elapsedLabel.font = [UIFont systemFontOfSize:CGRectGetHeight(self.elapsedLabel.frame)/1.8];
+        self.elapsedTimeLabel.font = [UIFont systemFontOfSize:CGRectGetHeight(self.elapsedTimeLabel.frame)/1.1];
+        
+        self.remainingLabel.font = [UIFont systemFontOfSize:CGRectGetHeight(self.remainingLabel.frame)/1.8];
+        self.remainingTimeLabel.font = [UIFont systemFontOfSize:CGRectGetHeight(self.remainingTimeLabel.frame)/1.1];
     }
     // iPhone5/5S
     else if (height == 568){
@@ -152,6 +140,24 @@ static NSString *const TimerMidTableViewCellIdentifier = @"TimerMidTableViewCell
         self.remainingLabel.font = [UIFont systemFontOfSize:CGRectGetHeight(self.remainingLabel.frame)/0.9];
         self.remainingTimeLabel.font = [UIFont systemFontOfSize:CGRectGetHeight(self.remainingTimeLabel.frame)/0.8];
     }
+
+}
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    UIBarButtonItem *stopClock = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(stopClockButtonDidPress:)];
+    self.navigationItem.leftBarButtonItem = stopClock;
+    
+    indexx = 0;
+    nee = [self.blocks objectAtIndex:indexx];
+    self.titleLabel.text = nee.blockName;
+    
+    new = [[MZTimerLabel alloc]initWithLabel:self.timerLabel andTimerType:MZTimerLabelTypeTimer];
+    [new setCountDownTime:[nee.blockTimeInterval intValue]];
+    new.delegate = self;
+}
+-(void)viewDidAppear:(BOOL)animated{
+    [self setupUI];
 }
 
 -(void)timerLabel:(MZTimerLabel*)timerLabel finshedCountDownTimerWithTime:(NSTimeInterval)countTime{
