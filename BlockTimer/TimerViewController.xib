@@ -25,6 +25,7 @@
                 <outlet property="titleLabel" destination="1yS-2A-7M1" id="tdI-8h-9Tv"/>
                 <outlet property="totalPercentageLabel" destination="ZCj-KZ-X9c" id="g77-6b-JLb"/>
                 <outlet property="totalProgressBar" destination="QnT-g8-jGh" id="Ryl-gy-ntx"/>
+                <outlet property="totalTimeLabel" destination="Dg5-KS-dTx" id="DCs-xQ-yed"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

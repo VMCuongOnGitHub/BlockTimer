@@ -31,6 +31,7 @@ static NSString *const TimerMidTableViewCellIdentifier = @"TimerMidTableViewCell
 
 // Detail timer of overall preset
 @property (weak, nonatomic) IBOutlet UILabel *totalPercentageLabel;
+@property (weak, nonatomic) IBOutlet UILabel *totalTimeLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *elapsedLabel;
 @property (weak, nonatomic) IBOutlet UILabel *elapsedTimeLabel;
@@ -72,12 +73,12 @@ static NSString *const TimerMidTableViewCellIdentifier = @"TimerMidTableViewCell
     // iPhone4/4S
     if (height == 480) {
         // Detail timer of blocks
-        self.titleLabel.font = [UIFont systemFontOfSize:CGRectGetHeight(self.titleLabel.frame)/1.5];
-        self.noteLabel.font = [UIFont systemFontOfSize:CGRectGetHeight(self.noteLabel.frame)/1.8];
+        self.titleLabel.font = [UIFont systemFontOfSize:CGRectGetHeight(self.titleLabel.frame)/1];
+        self.noteLabel.font = [UIFont systemFontOfSize:CGRectGetHeight(self.noteLabel.frame)/1.3];
         
-        self.blockNumberLabel.font = [UIFont systemFontOfSize:CGRectGetHeight(self.blockNumberLabel.frame)/2];
-        self.timerLabel.font = [UIFont systemFontOfSize:CGRectGetHeight(self.timerLabel.frame)/1.6];
-        self.blockTimeIntervalLabel.font = [UIFont systemFontOfSize:CGRectGetHeight(self.blockTimeIntervalLabel.frame)/1.7];
+        self.blockNumberLabel.font = [UIFont systemFontOfSize:CGRectGetHeight(self.blockNumberLabel.frame)/0.8];
+        self.timerLabel.font = [UIFont systemFontOfSize:CGRectGetHeight(self.timerLabel.frame)/1];
+        self.blockTimeIntervalLabel.font = [UIFont systemFontOfSize:CGRectGetHeight(self.blockTimeIntervalLabel.frame)/0.8];
         
         self.blockPercentageLabel.font = [UIFont systemFontOfSize:CGRectGetHeight(self.blockTimeIntervalLabel.frame)/0.7];
         
@@ -244,7 +245,7 @@ static NSString *const TimerMidTableViewCellIdentifier = @"TimerMidTableViewCell
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
             [new start];
         });
-    }
+        }
     }
 }
 - (IBAction)pauseButtonDidPress:(id)sender {
@@ -257,7 +258,6 @@ static NSString *const TimerMidTableViewCellIdentifier = @"TimerMidTableViewCell
             [new start];
         });
     }
-
 }
 - (IBAction)stopButtonDidPress:(id)sender {
 }
